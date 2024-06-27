@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="đk.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="box">
+      <div id="header"></div>
+      <div class="bck_header">
+        <div class="head">
+          <p style="cursor: context-menu">ĐĂNG KÝ TÀI KHOẢN</p>
+        </div>
+        <div class="tl">
+          <a href="../homepage/homepage.html">Trang chủ</a>
+          <span
+            ><b> <i class="fa-solid fa-chevron-right"></i> </b
+          ></span>
+          <a href="" style="color: #48cab2">Đăng ký tài khoản </a>
+        </div>
+      </div>
+      <div class="title"><p style="cursor: context-menu">ĐĂNG KÝ</p></div>
+      <form id="form">
+        <div class="bx-input">
+          <div class="input-box">
+            <label for="">Họ<sup style="color: red">*</sup></label>
+            <input type="text" id="last-name" placeholder="Họ" />
+            <span id="last-name-error" style="color: red;"></span>
+          </div>
+          <div class="input-box">
+            <label for="">Tên<sup style="color: red">*</sup></label>
+            <input type="text" id="first-name" placeholder="Tên" />
+            <span id="first-name-error" style="color: red;"></span>
+          </div>
+          <div class="input-box">
+            <label for="">Email<sup style="color: red">*</sup></label>
+            <input type="text" id="email" placeholder="Email" />
+            <span id="email-error" style="color: red;"></span>
+          </div>
+          <div class="input-box">
+            <label for="">Số điện thoại<sup style="color: red">*</sup></label>
+            <input type="text" id="phone" placeholder="Số điện thoại" />
+            <span id="phone-error" style="color: red;"></span>
+          </div>
+          <div class="input-box">
+            <label for="">Mật khẩu<sup style="color: red">*</sup></label>
+            <input type="password" id="password" placeholder="Mật khẩu" />
+            <span id="password-error" style="color: red;"></span>
+          </div>
+        </div>
+        <div class="btn">
+          <input type="submit" value="Đăng ký" />
+          
+        </div>
+      </form>
+      <div class="lg">
+        <span style="cursor: context-menu">Đã có tài khoản, đăng nhập </span
+        ><a href="./singin.html" style="text-decoration: underline">tại đây</a>
+      </div>
+      <div class="lk">
+        <p style="margin-bottom: 15px; cursor: context-menu">
+          Hoặc đăng nhập bằng
+        </p>
+        <a href=""
+          ><img
+            src="https://bizweb.dktcdn.net/assets/admin/images/login/fb-btn.svg"
+            alt=""
+        /></a>
+        <a href=""
+          ><img
+            src="https://bizweb.dktcdn.net/assets/admin/images/login/gp-btn.svg"
+            alt=""
+        /></a>
+      </div>
+      <div id="footer"></div>
+      <!-- validate -->
+      <script>
+        const last_name = document.getElementById('last-name')
+        const first_name = document.getElementById('first-name')
+        const email = document.getElementById('email')
+        const phone = document.getElementById('phone')
+        const password = document.getElementById('password')
+        const form = document.getElementById('form')
+        const first_name_error = document.getElementById('first-name-error')
+        const email_error = document.getElementById('email-error')
+        const last_name_error = document.getElementById('last-name-error')
+        const phone_error = document.getElementById('phone-error')
+        const password_error = document.getElementById('password-error')
+
+        const user = {
+          email: '',
+          password: '',
+          name: '',
+          phone: ''
+        };
+
+        form.addEventListener('submit',(e)=>{
+
+          var email_check = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+          var phone_check =  /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/g;
+
+          let isValid=true;
+
+          if(first_name.value === '' || first_name.value == null){
+            e.preventDefault();
+            first_name_error.innerHTML = "Vui lòng không để trống";
+            isValid=false
+          }
+          else{
+            first_name_error.innerHTML = "";
+            user.name= first_name.value;
+          }
+          if(last_name.value === '' || last_name.value == null){
+            e.preventDefault();
+            last_name_error.innerHTML = "Vui lòng không để trống";
+            isValid=false
+          }else{
+            last_name_error.innerHTML = "";
+          }
+          if(!phone.value.match(phone_check)){
+            e.preventDefault();
+            phone_error.innerHTML = "Nhập lại";
+            isValid=false
+          }
+          else{
+            phone_error.innerHTML = "";
+            user.phone=phone.value;
+          }
+          if(password.value === '' || password.value == null){
+            e.preventDefault();
+            password_error.innerHTML = "Vui lòng không để trống";
+            isValid=false
+          }
+          if(password.value.length < 8){
+            e.preventDefault();
+            password_error.innerHTML = "Nhập tối thiểu 8 kí tự";
+            isValid=false
+          }
+          else{
+            password_error.innerHTML = "";
+            user.password=password.value
+          }
+          if(!email.value.match(email_check)){
+            e.preventDefault();
+            email_error.innerHTML = "Không đúng định dạng email";
+            isValid=false
+          }
+          else{
+            email_error.innerHTML = "";
+            user.email=email.value
+          }
+          console.log("isValid:", isValid); // Kiểm tra giá trị của isValid
+          if (isValid) {
+            let json = JSON.stringify(user);
+            localStorage.setItem(user.email,json);
+            alert("Đăng kí thành công");
+            window.location.href = "./singin.html";
+          }
+        })
+      </script>
+      <!-- menu & footer,header -->
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          function setupEventListeners() {
+            const menuLink = document.querySelector(".menu a");
+            const overlay = document.querySelector(".overlay");
+            const sidebar = document.querySelector(".sidebar");
+      
+            if (menuLink && overlay && sidebar) {
+              menuLink.addEventListener("click", function(event) {
+                event.preventDefault(); // Ngăn chặn hành động mặc định của liên kết
+                overlay.style.display = "block";
+                sidebar.style.left = "0";
+              });
+      
+              overlay.addEventListener("click", function() {
+                overlay.style.display = "none";
+                sidebar.style.left = "-28%";
+              });
+            }
+          }
+      
+          // Hàm loadFile để tải file HTML vào phần tử có ID cụ thể
+          function loadFile(filePath, elementId) {
+            fetch(filePath)
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error(
+                    "Network response was not ok " + response.statusText
+                  );
+                }
+                return response.text();
+              })
+              .then((data) => {
+                document.getElementById(elementId).innerHTML = data;
+                setupEventListeners(); // Đảm bảo sự kiện được thêm sau khi nội dung được tải
+              })
+              .catch((error) => {
+                console.error(
+                  "There was a problem with the fetch operation:",
+                  error
+                );
+              });
+          }
+      
+          // Tải header_footer.html vào phần tử có id là 'header'
+          loadFile("../../Header $ Footer/header.html", "header");
+      
+          // Thêm file header_footer.css vào thẻ head của tài liệu
+          const headerLink = document.createElement("link");
+          headerLink.rel = "stylesheet";
+          headerLink.href = "../../Header $ Footer/header.css";
+          document.head.appendChild(headerLink);
+      
+          const headerScript = document.createElement("script");
+          headerScript.src = "../../fd_js/header.js";
+          document.head.appendChild(headerScript);
+      
+          // Tải header_footer.html vào phần tử có id là 'footer'
+          loadFile("../../Header $ Footer/footer.html", "footer");
+      
+          const footerLink = document.createElement("link");
+          footerLink.rel = "stylesheet";
+          footerLink.href = "../../Header $ Footer/footer.css";
+          document.head.appendChild(footerLink);
+        });
+      </script>
+      <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+      
+      </body>
+    </html>
+  
